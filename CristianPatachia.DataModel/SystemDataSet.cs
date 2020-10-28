@@ -15,17 +15,16 @@ namespace CristianPatachia.DataModel
 
         public SystemDataSet()
         {
-            Countries = new List<Country>();
-            Depots = new List<Depot>();
-            DrugTypes = new List<DrugType>();
-            DrugUnits = new List<DrugUnit>();
-            Sites = new List<Site>();
+            Countries   = new List<Country>();
+            Depots      = new List<Depot>();
+            DrugTypes   = new List<DrugType>();
+            DrugUnits   = new List<DrugUnit>();
+            Sites       = new List<Site>();
 
             // country
             Countries.Add(new Country() { Id = 1, Name = "USA" } );
             Countries.Add(new Country() { Id = 2, Name = "Canada" } );
             Countries.Add(new Country() { Id = 3, Name = "Mexico" });
-
             
             //depot
             Depots.Add(new Depot() { Id = "SUV01", Name = "AAADepot" } );
@@ -39,16 +38,13 @@ namespace CristianPatachia.DataModel
 
             // drugUnits
             for (int i = 1; i <= 20; i++)
-            {
-                DrugUnits.Add(new DrugUnit() { Id = 21 - i, PickNumber = i });
-            }
+            { DrugUnits.Add(new DrugUnit() { Id = 21 - i, PickNumber = i }); }
 
             // site
             Sites.Add(new Site() { Id = "F01", Name = "Facility01", CountryCode = 1 });
             Sites.Add(new Site() { Id = "F02", Name = "Facility02", CountryCode = 2 });
             Sites.Add(new Site() { Id = "F03", Name = "Facility03", CountryCode = 1 });
             Sites.Add(new Site() { Id = "F04", Name = "Facility04", CountryCode = 3 });
-
         }
     }
 }

@@ -34,15 +34,7 @@ namespace CristianPatachia.Domain.CorrelationService
             //                            })
             //                            .OrderBy(d => d.PickNumber);
 
-            //eturn correlatedData;
-
-            //CountryName = countries[i].Name,
-            //DepotName = depots[i].Name,
-            //PickNumber = drugUnits[j].PickNumber,
-            //DrugUnitId = drugUnits[j].Id,
-            //DrugTypeName = drugTypes[i + 1].Name,
-
-
+            //return correlatedData;
 
             for (int i = 0; i < countries.Count; i++)
             {

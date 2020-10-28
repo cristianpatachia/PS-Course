@@ -13,22 +13,21 @@ namespace CristianPatachia
     {
         public static void Main(string[] args)
         {
-            var systemDataSet = new SystemDataSet();
-            var depotInventoryService = new DepotInventoryService();
+            var systemDataSet           = new SystemDataSet();
+            var depotInventoryService   = new DepotInventoryService();
             var depotCorrelationService = new DepotCorrelationService(systemDataSet);
             var siteDistributionService = new SiteDistributionService(systemDataSet, depotCorrelationService);
 
-            var countries = systemDataSet.Countries;
-            var depots = systemDataSet.Depots;
-            var drugUnits = systemDataSet.DrugUnits;
-            var drugTypes = systemDataSet.DrugTypes;
-            var sites = systemDataSet.Sites;
+            var countries   = systemDataSet.Countries;
+            var depots      = systemDataSet.Depots;
+            var drugUnits   = systemDataSet.DrugUnits;
+            var drugTypes   = systemDataSet.DrugTypes;
+            var sites       = systemDataSet.Sites;
 
             //foreach (var country in countries) { Console.WriteLine($"Country Id: {country.Id}, Name: {country.Name}"); }
             //foreach (var depot in depots) { Console.WriteLine($"Depot Id: {depot.Id}, Name: {depot.Name}"); }
             //foreach (var type in drugTypes) { Console.WriteLine($"Drug Id: {type.Id}, Name: {type.Name}"); }
             //foreach (var unit in drugUnits) { Console.WriteLine($"Drug Unit: {unit.Id}, PickNumber: {unit.PickNumber}"); }
-
 
             depotInventoryService.AssociateDrugs(ref drugUnits, "SUV01", 5, 18);
             //foreach (var unit in drugUnits)
@@ -53,8 +52,8 @@ namespace CristianPatachia
             }
 
             //foreach (var type in drugUnits) { Console.WriteLine($"Drug Id: {type.Id} has been assigned to Type: {type.AssignedType}"); }
-
             //var sortedDrugs = AssignDrugType(drugUnits);
+
             var sortedDrugs = drugUnits.ToGroupedDrugUnitsgro();
 
             //foreach (var entry in sortedDrugs)
@@ -67,50 +66,21 @@ namespace CristianPatachia
             //}
 
             //var correlatedData = depotCorrelationService.CorrelateData();
-
             //foreach (var entry in correlatedData)
             //{
             //    Console.WriteLine($"Depot: {entry.DepotName}; Country: {entry.CountryId}; Drug type: {entry.DrugTypeName}; Drug Unit: {entry.DrugUnitId} Pick Number: {entry.PickNumber}");
             //}
 
             var requestedDrugs = siteDistributionService.GetRequestedDrugUnits("F02", "PainkillerXY", 5);
-            Console.WriteLine("Requested drugs for site 1:");
+            Console.WriteLine($"Requested drugs for site 2: ");
             foreach (var reqDrug in requestedDrugs)
             {
                 Console.WriteLine($"Drug Unit Id: {reqDrug.Id} - Pick Number: {reqDrug.PickNumber} - Drug Type: {reqDrug.AssignedType}");
             }
 
-
-
             Console.ReadLine();
 
-            //countries.Clear();
-            //depots.Clear();
-            //drugUnits.Clear();
-            //drugTypes.Clear();
-
         }
-        //public static void AssociateDrugs(string depotId, int startPickNumber, int endPickNumber, List<DrugUnit> drugUnits)
-        //{
-        //    foreach (var unit in drugUnits.Where(x => x.PickNumber > startPickNumber  && x.PickNumber < endPickNumber))
-        //    {
-        //        if (Enumerable.Range(startPickNumber, endPickNumber).Contains(unit.PickNumber))
-        //        {
-        //            unit.Destination = depotId;
-        //        }
-        //    }
-        //}
-
-        //public static void DisassociateDrugs(int startPickNumber, int endPickNumber, List<DrugUnit> drugUnits)
-        //{
-        //    foreach (var unit in drugUnits)
-        //    {
-        //        if (Enumerable.Range(startPickNumber, endPickNumber).Contains(unit.PickNumber))
-        //        {
-        //            unit.Destination = null;
-        //        }
-        //    }
-        //}
 
         public static void LabelDrugs(string drugName, int drugId, List<DrugUnit> drugUnits)
         {
@@ -123,26 +93,10 @@ namespace CristianPatachia
             }
         }
 
-        // Dictionary<string, List<DrugUnit>>
-        // the method will select all drug units from the collection and will group them by drug type 
-        // exec method in Main and display the result in the console 
-
         public static Dictionary<string, List<DrugUnit>> AssignDrugType(List<DrugUnit> drugUnits)
-        {
-            //var assignedDrugList = new Dictionary<string, int>();
-
-            //foreach (var drug in drugUnits)
-            //{
-            //    if (assignedDrugList.ContainsKey(drug.AssignedType))
-            //        assignedDrugList.Add(drug.AssignedType, drug.Id);
-            //    else
-            //        assignedDrugList[drug.AssignedType] = drug.Id;
-            //}
-            //return assignedDrugList;
-            return drugUnits
-                .GroupBy(x => x.AssignedType)
-                .ToDictionary(x => x.Key, x => x.ToList());
-        }
+                    => drugUnits
+                        .GroupBy(x => x.AssignedType)
+                        .ToDictionary(x => x.Key, x => x.ToList());
 
     }
 }

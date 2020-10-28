@@ -12,6 +12,6 @@ namespace CristianPatachia.Domain
             => drugUnits
                 .GroupBy(x => x.AssignedType)
                 .ToDictionary(x => x.Key, x => x.ToList());
-        
+
     }
 }

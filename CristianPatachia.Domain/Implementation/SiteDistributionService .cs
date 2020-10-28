@@ -38,25 +38,6 @@ namespace CristianPatachia.Domain.Implementation
                                         .AsEnumerable();
 
             return requestedDrugs;
-            
-            //The implementation of the method should select from the drug inventory that supplies the country’s site, 
-            //    the specified quantity of units of the requested type.
-            //correla0tedData.Where(x => x.Country == siteId).Select(x => x.DrugCode).Take(quantity);
         }
     }
 }
-//CountryName = countries[i].Name,
-//DepotName = depots[i].Name,
-//PickNumber = drugUnits[j].PickNumber,
-//DrugUnitId = drugUnits[j].Id,
-//DrugTypeName = drugTypes[i + 1].Name,
-
-//should select from the drug inventory that
-//supplies the country’s site, the specified quantity of units of the requested type
-
-    //In the Domain application, create an interface named ISiteDistributionService and a class 
-//SiteDistributionService which will implement the newly created interface. 
-//The signature of the method from ISiteDistributionService will be:
-//IEnumerable<DrugUnit> GetRequestedDrugUnits(string siteId, string drugCode, int quantity);
-//The implementation of the method should select from the drug inventory that 
-//supplies the country’s site, the specified quantity of units of the requested type.
